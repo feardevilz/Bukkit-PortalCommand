@@ -1,4 +1,4 @@
-package lilypad.bukkit.portal.command;
+package main.java.lilypad.bukkit.portal.command;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class CommandPlugin extends JavaPlugin implements IConfig, IRedirector {
 
 	@Override
 	public void onLoad() {
-		super.getConfig().options().copyDefaults(true);
+		super.getConfig().options().copyDefaults(false);
 		super.saveConfig();
 		super.reloadConfig();
 	}

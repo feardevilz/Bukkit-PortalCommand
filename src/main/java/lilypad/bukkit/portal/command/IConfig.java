@@ -1,4 +1,4 @@
-package lilypad.bukkit.portal.command;
+package main.java.lilypad.bukkit.portal.command;
 
 import java.util.List;
 
