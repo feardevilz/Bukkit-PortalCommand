@@ -47,7 +47,11 @@ public class ServerCommand implements CommandExecutor {
 		if(!(sender instanceof Player)) {
 			return true;
 		}
-		this.redirector.requestRedirect((Player) sender, server);
+		if (this.redirector.connected(server) == true) {
+			sender.sendMessage(this.config.getMessage("alreadyconnected"));
+		} else {
+			this.redirector.requestRedirect((Player) sender, server);
+		}
 		return true;
 	}
 

@@ -29,7 +29,11 @@ public class ServerQuickCommand implements Listener {
 		if(server == null) {
 			return;
 		}
-		this.redirector.requestRedirect(event.getPlayer(), server);
+		if (this.redirector.connected(server) == true) {
+			//sender.sendMessage(this.config.getMessage("alreadyconnected"));
+		} else {
+			this.redirector.requestRedirect(event.getPlayer(), server);
+		}
 		event.setCancelled(true);
 	}
 

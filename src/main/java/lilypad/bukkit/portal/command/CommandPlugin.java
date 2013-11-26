@@ -15,12 +15,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandPlugin extends JavaPlugin implements IConfig, IRedirector {
-
+	public String whoami;
+	public boolean result = false;
+	
 	@Override
 	public void onLoad() {
-		super.getConfig().options().copyDefaults(false);
-		super.saveConfig();
-		super.reloadConfig();
+		//super.getConfig().options().copyDefaults(false);
+		//super.saveConfig();
+		//super.reloadConfig();
 	}
 
 	@Override
@@ -47,6 +49,18 @@ public class CommandPlugin extends JavaPlugin implements IConfig, IRedirector {
 		return ChatColor.translateAlternateColorCodes('&', super.getConfig().getString("messages." + id));
 	}
 
+	// there's a flaw in lilypad, check if we're connected first -feardevilz
+	public boolean connected(String server) {
+		result = false;
+		
+		Connect connect = (Connect) this.getServer().getServicesManager().getRegistration(Connect.class).getProvider();
+		whoami = connect.getSettings().getUsername();
+		if(whoami.equalsIgnoreCase(server)) {
+			result = true;
+		}
+		return result;
+	}
+	
 	public void requestRedirect(final Player player, final String server) {
 		try {
 			Connect connect = this.getConnect();
